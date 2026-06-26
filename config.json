@@ -1,0 +1,15 @@
+{
+  "ticker": "NVDA",
+  "date": "2026-06-25",
+  "analysts": ["market", "fundamentals"],
+  "llm": {
+    "provider": "glm-cn",
+    "deep_think_model": "glm-5.2",
+    "quick_think_model": "glm-5.2",
+    "backend_url": "https://open.bigmodel.cn/api/coding/paas/v4/"
+  },
+  "max_debate_rounds": 1,
+  "request_timeout_seconds": 150,
+  "max_retries": 3,
+  "output_dir": "reports"
+}

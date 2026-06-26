@@ -1,0 +1,26 @@
+# Secrets — NEVER commit
+.env
+.env.local
+*.key
+
+# Python virtual environment (machine-specific, large)
+.venv/
+venv/
+env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Runtime logs / scratch
+run.log
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep the reports/ folder and the sample report, but ignore noise:
+reports/*.tmp

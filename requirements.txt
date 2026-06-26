@@ -1,0 +1,5 @@
+# The multi-agent framework (installs its own deps: langgraph, langchain, yfinance, pandas, ...)
+tradingagents @ git+https://github.com/TauricResearch/TradingAgents.git
+
+# For loading the GLM API key from .env
+python-dotenv>=1.0.0
