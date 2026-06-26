@@ -17,6 +17,7 @@ import sys
 import threading
 import traceback
 from datetime import date, datetime
+import socketserver
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 
@@ -328,8 +329,20 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(200, {"ok": True})
         return self._send(404, {"error": "not found"})
 
+class Dashboard(ThreadingHTTPServer):
+    daemon_threads = True
+    allow_reuse_address = True
+
+    def server_bind(self):
+        # Skip socket.getfqdn() — its reverse-DNS lookup can hang for seconds on Windows.
+        socketserver.TCPServer.server_bind(self)
+        host, port = self.server_address[:2]
+        self.server_name = host or "localhost"
+        self.server_port = port
+
+
 def main():
-    srv = ThreadingHTTPServer(("0.0.0.0", PORT), Handler)
+    srv = Dashboard(("127.0.0.1", PORT), Handler)
     print(f"\n  ◎ Equity Observatory  →  http://localhost:{PORT}")
     print(f"  model: {LLM['deep_think_model']}  ·  analysts: {', '.join(ANALYSTS)}  ·  workers: {MAX_WORKERS}\n")
     try:
